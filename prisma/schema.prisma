@@ -16,7 +16,7 @@ model Poll {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  PollOption PollOption[]
+  options PollOption[]
 }
 
 model PollOption {
