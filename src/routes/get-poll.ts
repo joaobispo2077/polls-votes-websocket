@@ -7,16 +7,18 @@ export async function getPollRoute(app: FastifyInstance) {
     const getPollParams = z.object({
       pollId: z.string().uuid(),
     });
-  
+
     const { pollId } = getPollParams.parse(request.body);
-  
+
     const poll = await prisma.poll.findUnique({
-     where: { id: pollId },
+      where: { id: pollId },
+      include: {
+        options: {
+          select: { title: true }
+        }
+      },
     });
 
-
-  
-  
     return response.send({ poll });
   });
 }
